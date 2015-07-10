@@ -13,6 +13,9 @@
   <script src="../bower_components/angularjs/angular.min.js"></script>
   <script src="../bower_components/angular-date-picker/angular-date-picker.js"></script>
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <style media="screen">
+    .block{display: block;margin: 0px auto}
+  </style>
 </head>
 <body ng-app="app" ng-controller="TimetableCtrl">
 
@@ -36,63 +39,67 @@
     <main class="mdl-layout__content">
       <div class="page-content mdl-grid">
 
-        <form ng-submit="process_query()" class="mdl-cell mdl-cell--4-col">
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" type="text" name="searchtype"ng-model="query.searchtype">
-            <label class="mdl-textfield__label" for="searchtype">類別</label>
+        <form ng-submit="process_query()" class="mdl-cell mdl-cell--12-col">
+          <input class="hidden" type="text" name="searchtype"ng-model="query.searchtype">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
+            <input class="mdl-textfield__input" type="text" name="fromstation"ng-model="query.fromstation">
+            <label class="mdl-textfield__label" for="fromstation">起站</label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
+            <input class="mdl-textfield__input" type="text" name="tostation" ng-model="query.tostation">
+            <label class="mdl-textfield__label" for="tostation">終點站</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
             <input class="mdl-textfield__input" type="text" name="searchdate" ng-model="query.searchdate">
             <label class="mdl-textfield__label" for="searchdate">日期</label>
-            <date-picker ng-model="query.searchdate" format-date="format_date" ></date-picker>
+            <date-picker ng-model="query.searchdate" format-date="format_date" class="hidden"></date-picker>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" type="text" name="fromstation"ng-model="query.fromstation">
-            <label class="mdl-textfield__label" for="sample1">起站</label>
+
+          <!-- <div class="mdl-grid">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="trainclass-1">
+              <input type="checkbox" id="trainclass-1" class="mdl-checkbox__input" checked />
+              <span class="mdl-checkbox__label">對號列車</span>
+            </label>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="trainclass-2">
+              <input type="checkbox" id="trainclass-2" class="mdl-checkbox__input" checked />
+              <span class="mdl-checkbox__label">非對號列車</span>
+            </label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" type="text" name="tostation" ng-model="query.tostation">
-            <label class="mdl-textfield__label" for="sample1">終點站</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" type="text" name="trainclass" ng-model="query.trainclass">
-            <label class="mdl-textfield__label" for="sample1">列車級別</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" type="text" name="fromtime" ng-model="query.fromtime">
-            <label class="mdl-textfield__label" for="sample1">起始時間</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" type="text" name="totime" ng-model="query.totime">
-            <label class="mdl-textfield__label" for="sample1">結束時間</label>
-          </div>
+
+          <div class="mdl-grid">
+            <label class="mdl-cell mdl-cell--4-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="session-1">
+              <input type="checkbox" id="session-1" class="mdl-checkbox__input" checked />
+              <span class="mdl-checkbox__label">早上</span>
+            </label>
+            <label class="mdl-cell mdl-cell--4-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="session-2">
+              <input type="checkbox" id="session-2" class="mdl-checkbox__input" checked />
+              <span class="mdl-checkbox__label">中午</span>
+            </label>
+            </label>
+            <label class="mdl-cell mdl-cell--4-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="session-3">
+              <input type="checkbox" id="session-3" class="mdl-checkbox__input" checked />
+              <span class="mdl-checkbox__label">晚上</span>
+            </label>
+          </div> -->
+
           <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">查詢</button>
         </form>
 
         {% raw %}
-        <div class="mdl-cell mdl-cell--8-col">
-          <!-- <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp"> -->
+        <div class="mdl-cell mdl-cell--12-col">
           <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">
             <thead>
               <tr>
-                <th>車次</th>
                 <th class="mdl-data-table__cell--non-numeric">車種</th>
-                <th>發車時間</th>
-                <th>抵達時間</th>
                 <th>旅途時間</th>
                 <th>價格</th>
-                <th class="mdl-data-table__cell--non-numeric">路線</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="r in results">
-                <td>{{r.train_code}}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{r.train_type}}</td>
-                <td>{{r.launch_time}}</td>
-                <td>{{r.arrive_time}}</td>
-                <td>{{r.duration}}</td>
+                <td>{{r.launch_time}} ~ {{r.arrive_time}}</td>
                 <td>{{r.price}}</td>
-                <td>{{r.route}}({{r.versa}}線)</td>
               </tr>
             </tbody>
           </table>
@@ -100,6 +107,7 @@
         {% endraw %}
 
       </div>
+
     </main>
   </div>
 
@@ -110,7 +118,7 @@ var app = angular.module("app", ['mp.datePicker']);
 app.controller("TimetableCtrl", function($scope, $http) {
   $scope.query = {};
   $scope.query.searchtype = 0;
-  $scope.query.searchdate = '2015/07/09';
+  $scope.query.searchdate = format_date(new Date());
   $scope.query.fromstation = 1317;
   $scope.query.tostation = 1025;
   $scope.query.trainclass = 2;
@@ -130,14 +138,14 @@ app.controller("TimetableCtrl", function($scope, $http) {
     });
   }
 
-  $scope.format_date = function (date) {
-      function pad(n) {
-          return n < 10 ? '0' + n : n;
-      }
-
-      return date && date.getFullYear()
-          + '/' + pad(date.getMonth() + 1)
-          + '/' + pad(date.getDate());
+  $scope.format_date = format_date;
+  function format_date(date) {
+    function pad(n) {
+        return n < 10 ? '0' + n : n;
+    }
+    return date && date.getFullYear()
+        + '/' + pad(date.getMonth() + 1)
+        + '/' + pad(date.getDate());
   };
 
 });
