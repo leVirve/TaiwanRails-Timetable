@@ -11,6 +11,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
+
 @app.route('/bower_components/<path:path>')
 def send_js(path):
     return send_from_directory('bower_components', path)
