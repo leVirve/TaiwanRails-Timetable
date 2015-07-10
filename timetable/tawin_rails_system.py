@@ -50,25 +50,18 @@ class TrainTimetable():
         return Queryset(document.xpath("//tbody/tr[@class='Grid_Row']"))
 
     def clean_data(self, **kwargs):
-        # searchtype=0,
-        # searchdate='2015/07/08',
-        # fromstation=1317,
-        # tostation=1025,
-        # trainclass=2,
-        # fromtime='0000',
-        # totime='2359',
         src = kwargs.get('fromstation', '')
-        end = kwargs.get('totation', '')
-        time1 = kwargs.get('fromtime', '')
-        time2 = kwargs.get('totime', '')
-        trainclass = kwargs.get('trainclass', '')
-        kwargs['fromstation'] = (src)
-        kwargs['fromstation'] = (end)
-        kwargs['fromtime'] = (time1)
-        kwargs['totime'] = (time2)
-        kwargs['trainclass'] = (trainclass)
+        end = kwargs.get('tostation', '')
+        kwargs['fromstation'] = self.station_name_to_code(src)
+        kwargs['tostation'] = self.station_name_to_code(end)
+        return kwargs
 
     def get_station_data(self):
         f = open('timetable/station.json', 'r', encoding='utf8')
         return json.loads(f.read())
 
+    def station_name_to_code(self, name):
+        name = name.replace('台', '臺') + '站'
+        for station in self.stations:
+            if name == station['站名']:
+                return station['時刻表編號']
