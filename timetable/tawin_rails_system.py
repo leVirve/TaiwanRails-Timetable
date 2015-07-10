@@ -41,7 +41,7 @@ class TrainTimetable():
     time_table_url = 'http://twtraffic.tra.gov.tw/twrail/SearchResult.aspx'
 
     def __init__(self):
-        pass
+        self.stations = self.get_station_data()
 
     def query(self, **kwargs):
         # kwargs = self.clean_data(kwargs)
@@ -67,3 +67,8 @@ class TrainTimetable():
         kwargs['fromtime'] = (time1)
         kwargs['totime'] = (time2)
         kwargs['trainclass'] = (trainclass)
+
+    def get_station_data(self):
+        f = open('timetable/station.json', 'r', encoding='utf8')
+        return json.loads(f.read())
+
