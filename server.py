@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request, render_template, send_from_directory
-from timetable import tawin_rails_system
+from timetable import taiwan_rails_system
 
 
 app = Flask(__name__, static_url_path='')
@@ -16,9 +16,14 @@ def send_js(path):
     return send_from_directory('bower_components', path)
 
 
+@app.route('/favicon-16x16.png')
+def send_fav():
+    return send_from_directory('bower_components', '/favicon-16x16.png')
+
+
 @app.route('/q', methods=['GET', 'POST'])
 def query():
-    timetable = tawin_rails_system.TrainTimetable()
+    timetable = taiwan_rails_system.TrainTimetable()
     results = timetable.query(
         **request.form.to_dict()
     )
