@@ -14,7 +14,37 @@
   <script src="../bower_components/angular-date-picker/angular-date-picker.js"></script>
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
   <style media="screen">
-    .block{display: block;margin: 0px auto}
+    .center{margin: 0px auto}
+    .short{width: 100px; margin-top: 20px}
+    .long{width: 160px}
+    .swap_icon{padding: 5px}
+    .button_upper{margin-top: -70px; margin-left: 15px}
+    .search_div{background-color: #3F51B5; color:#fff;text-align: center}
+
+    .card{
+      padding: 18px;
+      border-bottom: #eee 1px solid;
+    }
+    .card-left{
+      width: 50px;
+      float: left;
+      text-align: center;
+    }
+    .card-mid{
+      width: calc(100% - 90px);
+      float: left;
+      text-align: center;
+    }
+    .card-right{
+      width: 40px;
+      float: right;
+      text-align: center;
+    }
+    .card:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
   </style>
 </head>
 <body ng-app="app" ng-controller="TimetableCtrl">
@@ -37,22 +67,32 @@
       </nav>
     </div>
     <main class="mdl-layout__content">
-      <div class="page-content mdl-grid">
+      <div class="page-content">
 
-        <form ng-submit="process_query()" class="mdl-cell mdl-cell--12-col">
+        <form ng-submit="process_query()" class="search_div">
           <input class="hidden" type="text" name="searchtype"ng-model="query.searchtype">
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-            <input class="mdl-textfield__input" type="text" name="fromstation"ng-model="query.fromstation">
-            <label class="mdl-textfield__label" for="fromstation">起站</label>
+          <div class="center">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label short">
+              <input class="mdl-textfield__input" type="text" name="fromstation"ng-model="query.fromstation">
+              <label class="mdl-textfield__label" style="color:#ddd" for="fromstation">起站</label>
+            </div>
+            <!-- <a href="#" ng-click="swap()"><i class="material-icons">swap_vert</i></a> -->
+            <span class="swap_icon">
+              <a href="#" ng-click="swap()"><i class="material-icons">swap_horiz</i></a>
+            </span>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label short">
+              <input class="mdl-textfield__input" type="text" name="tostation" ng-model="query.tostation">
+              <label class="mdl-textfield__label" style="color:#ddd" for="tostation">迄站</label>
+            </div>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-            <input class="mdl-textfield__input" type="text" name="tostation" ng-model="query.tostation">
-            <label class="mdl-textfield__label" for="tostation">終點站</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-            <input class="mdl-textfield__input" type="text" name="searchdate" ng-model="query.searchdate">
-            <label class="mdl-textfield__label" for="searchdate">日期</label>
-            <date-picker ng-model="query.searchdate" format-date="format_date" class="hidden"></date-picker>
+          <div class="center">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label long">
+              <input class="mdl-textfield__input" type="text" name="searchdate" ng-model="query.searchdate">
+              <label class="mdl-textfield__label" style="color:#ddd" for="searchdate">日期</label>
+              <date-picker ng-model="query.searchdate" format-date="format_date" class="hidden"></date-picker>
+            </div>
+
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect button_upper">查詢</button>
           </div>
 
           <!-- <div class="mdl-grid">
@@ -82,30 +122,24 @@
             </label>
           </div> -->
 
-          <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">查詢</button>
+          <!-- <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">查詢</button> -->
         </form>
 
         {% raw %}
-        <div class="mdl-cell mdl-cell--12-col">
-          <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">
-            <thead>
-              <tr>
-                <th class="mdl-data-table__cell--non-numeric">車種</th>
-                <th>旅途時間</th>
-                <th>價格</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="r in results">
-                <td class="mdl-data-table__cell--non-numeric">{{r.train_type}}</td>
-                <td>{{r.launch_time}} ~ {{r.arrive_time}}</td>
-                <td>{{r.price}}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div ng-repeat="r in results" class="card">
+          <div class="card-left center">
+            <span>{{r.train_code}}</span><br>
+            <span>{{r.train_type}}</span>
+          </div>
+          <div class="card-mid">
+            <span>{{r.launch_time}} ~ {{r.arrive_time}}</span><br>
+            <span>{{r.route}} [{{r.versa}}]</span>
+          </div>
+          <div class="card-right">
+            {{r.price}}
+          </div>
         </div>
         {% endraw %}
-
       </div>
 
     </main>
@@ -119,8 +153,8 @@ app.controller("TimetableCtrl", function($scope, $http) {
   $scope.query = {};
   $scope.query.searchtype = 0;
   $scope.query.searchdate = format_date(new Date());
-  $scope.query.fromstation = 1317;
-  $scope.query.tostation = 1025;
+  $scope.query.fromstation = '新竹';
+  $scope.query.tostation = '豐原';
   $scope.query.trainclass = 2;
   $scope.query.fromtime = '0000';
   $scope.query.totime = '2359';
@@ -137,6 +171,12 @@ app.controller("TimetableCtrl", function($scope, $http) {
       $scope.results = data;
     });
   }
+
+  $scope.swap = function() {
+    var tmp = $scope.query.tostation;
+    $scope.query.tostation = $scope.query.fromstation;
+    $scope.query.fromstation = tmp;
+  };
 
   $scope.format_date = format_date;
   function format_date(date) {
