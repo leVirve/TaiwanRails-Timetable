@@ -19,6 +19,7 @@
     "materialize": "~0.97.0",
     "angularjs": "~1.4.2",
     "jquery": "~2.1.4",
-    "material-design-lite": "~1.0.0"
+    "material-design-lite": "~1.0.0",
+    "angular-date-picker": "~1.2.1"
   }
 }
