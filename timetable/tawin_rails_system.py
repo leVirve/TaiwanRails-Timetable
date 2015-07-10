@@ -43,8 +43,8 @@ class TrainTimetable():
     def __init__(self):
         self.stations = self.get_station_data()
 
-    def query(self, **kwargs):
-        # kwargs = self.clean_data(kwargs)
+    def query(self, name_code=True, **kwargs):
+        kwargs = self.clean_data(**kwargs) if name_code else kwargs
         response = requests.get(self.time_table_url, params=kwargs)
         document = lxml.html.fromstring(response.text)
         return Queryset(document.xpath("//tbody/tr[@class='Grid_Row']"))
