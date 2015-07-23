@@ -4,8 +4,7 @@
   <title>台鐵時刻表查詢</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel='icon' type='image/x-icon' href='/favicon.ico'> -->
-  <link rel='icon' href='/favicon-16x16.png'>
+  <link rel="shortcut icon" href="/favicon-96x96.png">
 
   <link rel="stylesheet" href="../bower_components/material-design-lite/material.min.css">
   <!-- <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css"> -->
@@ -25,7 +24,8 @@
     .search_div{background-color: #3F51B5; color:#fff;text-align: center}
 
     .card{
-      padding: 18px;
+      width: 360px;
+      padding: 18px 0;
       border-bottom: #eee 1px solid;
     }
     .card-left{
@@ -61,12 +61,10 @@
       </div>
     </header>
     <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">Title</span>
+      <span class="mdl-layout-title">常用路線</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="#" ng-click="set_location('新竹', '豐原')">新竹 ↔ 豐原</a>
+        <a class="mdl-navigation__link" href="#" ng-click="set_location('台中', '豐原')">台中 ↔ 豐原</a>
       </nav>
     </div>
     <main class="mdl-layout__content">
@@ -124,12 +122,10 @@
               <span class="mdl-checkbox__label">晚上</span>
             </label>
           </div> -->
-
-          <!-- <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">查詢</button> -->
         </form>
 
         {% raw %}
-        <div ng-repeat="r in results" class="card">
+        <div ng-repeat="r in results" class="card center">
           <div class="card-left center">
             <span>{{r.train_code}}</span><br>
             <span>{{r.train_type}}</span>
@@ -173,6 +169,11 @@ app.controller("TimetableCtrl", function($scope, $http) {
       console.log(data);
       $scope.results = data;
     });
+  }
+
+  $scope.set_location = function(from, to) {
+    $scope.query.fromstation = from;
+    $scope.query.tostation = to;
   }
 
   $scope.swap = function() {

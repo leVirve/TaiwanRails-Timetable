@@ -17,9 +17,9 @@ def send_js(path):
     return send_from_directory('bower_components', path)
 
 
-@app.route('/favicon-16x16.png')
+@app.route('/favicon-96x96.png')
 def send_fav():
-    return send_from_directory('bower_components', '/favicon-16x16.png')
+    return send_from_directory(app.root_path, 'favicon-96x96.png')
 
 
 @app.route('/q', methods=['GET', 'POST'])
@@ -30,12 +30,6 @@ def query():
     )
     return results.to_json()
 
-
-def some_test():
-    ip = request.remote_addr
-    return 'remote_addr' + ip
-    # return str(request.headers)
-    return str(request.headers.getlist("X-Forwarded-For"))
 
 if __name__ == '__main__':
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
