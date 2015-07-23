@@ -6,15 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="/favicon-96x96.png">
 
-  <link rel="stylesheet" href="../bower_components/material-design-lite/material.min.css">
-  <!-- <link rel="stylesheet" href="../bower_components/materialize/dist/css/materialize.min.css"> -->
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="../bower_components/angular-date-picker/angular-date-picker.css">
-  <script src="../bower_components/material-design-lite/material.min.js"></script>
-  <!-- <script src="../bower_components/materialize/dist/js/materialize.min.js"></script> -->
-  <script src="../bower_components/angularjs/angular.min.js"></script>
-  <script src="../bower_components/angular-date-picker/angular-date-picker.js"></script>
-  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.indigo-pink.min.css">
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <style media="screen">
     .center{margin: 0px auto}
     .short{width: 100px; margin-top: 20px}
@@ -51,12 +47,9 @@
   </style>
 </head>
 <body ng-app="app" ng-controller="TimetableCtrl">
-
-  <!-- Always shows a header, even in smaller screens. -->
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
-        <!-- Title -->
         <span class="mdl-layout-title">台鐵時刻表</span>
       </div>
     </header>
@@ -77,7 +70,6 @@
               <input class="mdl-textfield__input" type="text" name="fromstation"ng-model="query.fromstation">
               <label class="mdl-textfield__label" style="color:#ddd" for="fromstation">起站</label>
             </div>
-            <!-- <a href="#" ng-click="swap()"><i class="material-icons">swap_vert</i></a> -->
             <span class="swap_icon">
               <a href="#" ng-click="swap()"><i class="material-icons">swap_horiz</i></a>
             </span>
@@ -95,33 +87,6 @@
 
             <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect button_upper">查詢</button>
           </div>
-
-          <!-- <div class="mdl-grid">
-            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="trainclass-1">
-              <input type="checkbox" id="trainclass-1" class="mdl-checkbox__input" checked />
-              <span class="mdl-checkbox__label">對號列車</span>
-            </label>
-            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="trainclass-2">
-              <input type="checkbox" id="trainclass-2" class="mdl-checkbox__input" checked />
-              <span class="mdl-checkbox__label">非對號列車</span>
-            </label>
-          </div>
-
-          <div class="mdl-grid">
-            <label class="mdl-cell mdl-cell--4-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="session-1">
-              <input type="checkbox" id="session-1" class="mdl-checkbox__input" checked />
-              <span class="mdl-checkbox__label">早上</span>
-            </label>
-            <label class="mdl-cell mdl-cell--4-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="session-2">
-              <input type="checkbox" id="session-2" class="mdl-checkbox__input" checked />
-              <span class="mdl-checkbox__label">中午</span>
-            </label>
-            </label>
-            <label class="mdl-cell mdl-cell--4-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="session-3">
-              <input type="checkbox" id="session-3" class="mdl-checkbox__input" checked />
-              <span class="mdl-checkbox__label">晚上</span>
-            </label>
-          </div> -->
         </form>
 
         {% raw %}
@@ -146,7 +111,7 @@
 
 
 <script type="text/javascript">
-var app = angular.module("app", ['mp.datePicker']);
+var app = angular.module("app", []);
 
 app.controller("TimetableCtrl", function($scope, $http) {
   $scope.query = {};
@@ -166,7 +131,6 @@ app.controller("TimetableCtrl", function($scope, $http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .success(function(data) {
-      console.log(data);
       $scope.results = data;
     });
   }
