@@ -1,6 +1,7 @@
 import json
 import requests
 import lxml.html
+import urllib.parse
 
 FILELDS = {
     'train_type': "./td[1]//div/span",
@@ -12,6 +13,7 @@ FILELDS = {
     'duration': "./td[7]/font",
     'comment': "./td[8]//div/span[@id='Comment']",
     'price': "./td[9]//span",
+    'order_url': "./td[10]//a",
 }
 
 
@@ -27,7 +29,14 @@ class Queryset():
         ]
 
     def _parse_by_path(self, row, path):
-        return row.xpath(path)[0].text
+        try:
+            if '10' in path:
+                return urllib.parse.urljoin(
+                    TrainTimetable.TRA_home_url,
+                    row.xpath(path)[0].attrib.get('href'))
+            return row.xpath(path)[0].text
+        except Exception:
+            return '#'
 
     def to_json(self):
         return json.dumps(self._results, default=lambda o: o.__dict__)
@@ -39,14 +48,17 @@ class Queryset():
 class TrainTimetable():
 
     time_table_url = 'http://twtraffic.tra.gov.tw/twrail/SearchResult.aspx'
+    TRA_home_url = 'http://twtraffic.tra.gov.tw/twrail/'
 
     def __init__(self):
         self.stations = self.get_station_data()
+        self.document = None
 
     def query(self, name_code=True, **kwargs):
         kwargs = self.clean_data(**kwargs) if name_code else kwargs
         response = requests.get(self.time_table_url, params=kwargs)
         document = lxml.html.fromstring(response.text)
+        self.document = document
         return Queryset(document.xpath("//tbody/tr[@class='Grid_Row']"))
 
     def clean_data(self, **kwargs):
