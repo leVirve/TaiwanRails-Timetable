@@ -20,7 +20,6 @@
     .search_div{background-color: #3F51B5; color:#fff;text-align: center}
 
     .card{
-      width: 320px;
       margin: 0 18px;
       padding: 18px 0;
       border-bottom: #eee 1px solid;
@@ -101,7 +100,8 @@
             <span>{{r.route}} [{{r.versa}}]</span>
           </div>
           <div class="card-right">
-            <a href="{{r.order_url}}">{{r.price}}</a>
+            <a ng-show="r.order_url!='#'" href="{{r.order_url}}">{{r.price}}</a>
+            <span ng-show="r.order_url=='#'">{{r.price}}</span>
           </div>
         </div>
         {% endraw %}
