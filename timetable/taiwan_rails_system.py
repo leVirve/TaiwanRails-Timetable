@@ -1,7 +1,6 @@
 import json
 import requests
 import lxml.html
-import urllib.parse
 
 FILELDS = {
     'train_type': "./td[1]//div/span",
@@ -13,7 +12,7 @@ FILELDS = {
     'duration': "./td[7]/font",
     'comment': "./td[8]//div/span[@id='Comment']",
     'price': "./td[9]//span",
-    'order_url': "./td[10]//a",
+    'order_url': "./td[10]//a/@href",
 }
 
 
@@ -31,10 +30,8 @@ class Queryset():
     def _parse_by_path(self, row, path):
         try:
             if '10' in path:
-                return urllib.parse.urljoin(
-                    TrainTimetable.TRA_home_url,
-                    row.xpath(path)[0].attrib.get('href'))
-            return row.xpath(path)[0].text
+                return row.xpath(path)[0]
+            return row.findtext(path)
         except Exception:
             return '#'
 
@@ -57,6 +54,7 @@ class TrainTimetable():
         kwargs = self.clean_data(**kwargs) if name_code else kwargs
         response = requests.get(self.time_table_url, params=kwargs)
         document = lxml.html.fromstring(response.text)
+        document.make_links_absolute(self.TRA_home_url)
         return Queryset(document.xpath("//tbody/tr[@class='Grid_Row']"))
 
     def clean_data(self, **kwargs):
