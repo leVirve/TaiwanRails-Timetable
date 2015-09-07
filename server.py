@@ -1,10 +1,11 @@
 from flask import Flask
-from flask import request, render_template, send_from_directory
+from flask import request, render_template, send_from_directory ,jsonify
 from timetable import taiwan_rails_system
 
 import os
 
 app = Flask(__name__, static_url_path='')
+timetable = taiwan_rails_system.TrainTimetable()
 
 
 @app.route('/')
@@ -24,12 +25,18 @@ def send_fav():
 
 @app.route('/q', methods=['GET', 'POST'])
 def query():
-    timetable = taiwan_rails_system.TrainTimetable()
     results = timetable.query(
         **request.form.to_dict()
     )
-    return results.to_json()
+    return jsonify(trains=results)
+
+
+@app.route('/book', methods=['GET', 'POST'])
+def book():
+    timetable.book_ticket(request.query_string)
+    return request.query_string
 
 
 if __name__ == '__main__':
+    app.debug = True
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))

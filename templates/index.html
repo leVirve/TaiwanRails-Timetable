@@ -20,8 +20,9 @@
     .search_div{background-color: #3F51B5; color:#fff;text-align: center}
 
     .card{
+      min-width: 300px;
       margin: 0 18px;
-      padding: 18px 0;
+      padding: 5% 0;
       border-bottom: #eee 1px solid;
     }
     .card-left{
@@ -30,13 +31,13 @@
       text-align: center;
     }
     .card-mid{
-      width: calc(100% - 90px);
+      width: calc(100% - 130px);
       float: left;
       text-align: center;
     }
     .card-right{
-      width: 40px;
-      float: right;
+      width: 80px;
+      float: left;
       text-align: center;
     }
     .card:after {
@@ -100,8 +101,8 @@
             <span>{{r.route}} [{{r.versa}}]</span>
           </div>
           <div class="card-right">
-            <a ng-show="r.order_url!='#'" href="{{r.order_url}}">{{r.price}}</a>
-            <span ng-show="r.order_url=='#'">{{r.price}}</span>
+            <a ng-if="r.order_url!=null" href="/book?{{r.order_url}}"><i class="material-icons">bookmark_border</i></a>
+            <span>{{r.price}}</span>
           </div>
         </div>
         {% endraw %}
@@ -132,7 +133,7 @@ app.controller("TimetableCtrl", function($scope, $http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .success(function(data) {
-      $scope.results = data;
+      $scope.results = data.trains;
     });
   }
 

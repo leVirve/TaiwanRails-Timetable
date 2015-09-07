@@ -19,7 +19,7 @@ FILELDS = {
 class Queryset():
 
     def __init__(self, rows):
-        self._results = self._parse(rows)
+        self.results = self._parse(rows)
 
     def _parse(self, rows):
         return [
@@ -29,17 +29,12 @@ class Queryset():
 
     def _parse_by_path(self, row, path):
         try:
-            if '10' in path:
-                return row.xpath(path)[0]
-            return row.findtext(path)
+            return row.xpath(path)[0] if '10' in path else row.findtext(path)
         except Exception:
-            return '#'
-
-    def to_json(self):
-        return json.dumps(self._results, default=lambda o: o.__dict__)
+            return None
 
     def __iter__(self):
-        return self._results.__iter__()
+        return self.results.__iter__()
 
 
 class TrainTimetable():
@@ -55,7 +50,7 @@ class TrainTimetable():
         response = requests.get(self.time_table_url, params=kwargs)
         document = lxml.html.fromstring(response.text)
         document.make_links_absolute(self.TRA_home_url)
-        return Queryset(document.xpath("//tbody/tr[@class='Grid_Row']"))
+        return Queryset(document.xpath("//tbody/tr[@class='Grid_Row']")).results
 
     def clean_data(self, **kwargs):
         src = kwargs.get('fromstation', '')
@@ -73,3 +68,6 @@ class TrainTimetable():
         for station in self.stations:
             if name == station['站名']:
                 return station['時刻表編號']
+
+    def book_ticket(self, refer):
+        pass
