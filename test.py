@@ -1,23 +1,16 @@
-import time
-from timetable import TrainTimetable
+from timetable import TrainClass, TaiwanRails
 
 
 if __name__ == '__main__':
+    station_a, station_b, station_c = ('新莊', '新竹', '豐原')
 
-    timetable = TrainTimetable()
-    results = timetable.query(
-        name_code=False,
-        searchtype=0,
-        searchdate=time.strftime('%Y/%m/%m'),
-        fromstation=1025,  # 豐原
-        tostation=1317,  # 新竹
-        trainclass=2,  # 對號/無對號/全部
-        fromtime=time.strftime('%H%M'),
-        totime='2359',
+    timetable = TaiwanRails()
+    possible_trains = timetable.schedule(
+        start=station_a,
+        stop=station_c,
+        transfer=station_b,
+        date='2019/03/02', start_time='1000',
+        train_class=TrainClass.ALL
     )
-
-    print(timetable.station_name_to_code('豐原'))
-    for r in results:
-        if r['order_url'] != '#':
-            print(r)
-            break
+    for train in possible_trains:
+        print(train)

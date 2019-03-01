@@ -1,0 +1,211 @@
+[
+  {
+    "City_Code": "0",
+    "City_Name": "臺北/基隆地區",
+    "City_EName": "Taipei/Keelung",
+    "Data_date": "1",
+    "City_Name_JP": "台北/基隆地区",
+    "City_Name_KR": "타이베이/지룽 지역",
+    "City_Name_SC": "台北/基隆地区",
+    "IDCode": "0",
+    "TextValue": "臺北/基隆地區"
+  },
+  {
+    "City_Code": "1",
+    "City_Name": "桃園地區",
+    "City_EName": "Taoyuan",
+    "Data_date": "1",
+    "City_Name_JP": "桃園地区",
+    "City_Name_KR": "타오위엔 지역",
+    "City_Name_SC": "桃园地区",
+    "IDCode": "1",
+    "TextValue": "桃園地區"
+  },
+  {
+    "City_Code": "2",
+    "City_Name": "新竹地區",
+    "City_EName": "Hsinchu  ",
+    "Data_date": "1",
+    "City_Name_JP": "新竹地区",
+    "City_Name_KR": "신주 지역",
+    "City_Name_SC": "新竹地区",
+    "IDCode": "2",
+    "TextValue": "新竹地區"
+  },
+  {
+    "City_Code": "3",
+    "City_Name": "苗栗地區",
+    "City_EName": "Miaoli  ",
+    "Data_date": "1",
+    "City_Name_JP": "苗栗地区",
+    "City_Name_KR": "먀오리 지역",
+    "City_Name_SC": "苗栗地区",
+    "IDCode": "3",
+    "TextValue": "苗栗地區"
+  },
+  {
+    "City_Code": "4",
+    "City_Name": "臺中地區",
+    "City_EName": "Taichung  ",
+    "Data_date": "1",
+    "City_Name_JP": "台中地区",
+    "City_Name_KR": "타이종 지역",
+    "City_Name_SC": "台中地区",
+    "IDCode": "4",
+    "TextValue": "臺中地區"
+  },
+  {
+    "City_Code": "5",
+    "City_Name": "彰化地區",
+    "City_EName": "Changhua  ",
+    "Data_date": "1",
+    "City_Name_JP": "彰化地区",
+    "City_Name_KR": "짱화 지역",
+    "City_Name_SC": "彰化地区",
+    "IDCode": "5",
+    "TextValue": "彰化地區"
+  },
+  {
+    "City_Code": "6",
+    "City_Name": "南投地區",
+    "City_EName": "Nantou",
+    "Data_date": "1",
+    "City_Name_JP": "南投地区",
+    "City_Name_KR": "난토우 지역",
+    "City_Name_SC": "南投地区",
+    "IDCode": "6",
+    "TextValue": "南投地區"
+  },
+  {
+    "City_Code": "7",
+    "City_Name": "雲林地區",
+    "City_EName": "Yunlin",
+    "Data_date": "1",
+    "City_Name_JP": "雲林地区",
+    "City_Name_KR": "윈린 지역",
+    "City_Name_SC": "云林地区",
+    "IDCode": "7",
+    "TextValue": "雲林地區"
+  },
+  {
+    "City_Code": "8",
+    "City_Name": "嘉義地區",
+    "City_EName": "Chiayi  ",
+    "Data_date": "1",
+    "City_Name_JP": "嘉義地区",
+    "City_Name_KR": "자이 지역",
+    "City_Name_SC": "嘉义地区",
+    "IDCode": "8",
+    "TextValue": "嘉義地區"
+  },
+  {
+    "City_Code": "9",
+    "City_Name": "臺南地區",
+    "City_EName": "Tainan",
+    "Data_date": "1",
+    "City_Name_JP": "台南地区",
+    "City_Name_KR": "타이난 지역",
+    "City_Name_SC": "台南地区",
+    "IDCode": "9",
+    "TextValue": "臺南地區"
+  },
+  {
+    "City_Code": "10",
+    "City_Name": "高雄地區",
+    "City_EName": "Kaohsiung",
+    "Data_date": "1",
+    "City_Name_JP": "高雄地区",
+    "City_Name_KR": "까오숑 지역",
+    "City_Name_SC": "高雄地区",
+    "IDCode": "10",
+    "TextValue": "高雄地區"
+  },
+  {
+    "City_Code": "11",
+    "City_Name": "屏東地區",
+    "City_EName": "Pingtung  ",
+    "Data_date": "1",
+    "City_Name_JP": "屏東地区",
+    "City_Name_KR": "핑동 지역",
+    "City_Name_SC": "屏东地区",
+    "IDCode": "11",
+    "TextValue": "屏東地區"
+  },
+  {
+    "City_Code": "12",
+    "City_Name": "臺東地區",
+    "City_EName": "Taitung",
+    "Data_date": "1",
+    "City_Name_JP": "台東地区",
+    "City_Name_KR": "타이동 지역",
+    "City_Name_SC": "台东地区",
+    "IDCode": "12",
+    "TextValue": "臺東地區"
+  },
+  {
+    "City_Code": "13",
+    "City_Name": "花蓮地區",
+    "City_EName": "Hualien  ",
+    "Data_date": "1",
+    "City_Name_JP": "花蓮地区",
+    "City_Name_KR": "화리엔 지역",
+    "City_Name_SC": "花莲地区",
+    "IDCode": "13",
+    "TextValue": "花蓮地區"
+  },
+  {
+    "City_Code": "14",
+    "City_Name": "宜蘭地區",
+    "City_EName": "Yilan  ",
+    "Data_date": "1",
+    "City_Name_JP": "宜蘭地区",
+    "City_Name_KR": "이란 지역",
+    "City_Name_SC": "宜兰地区",
+    "IDCode": "14",
+    "TextValue": "宜蘭地區"
+  },
+  {
+    "City_Code": "15",
+    "City_Name": "平溪/深澳線",
+    "City_EName": "Pinghsi / ShenAo Line",
+    "Data_date": "1",
+    "City_Name_JP": "平渓/深澳線",
+    "City_Name_KR": "핑시/선아오선",
+    "City_Name_SC": "平溪/深澳线",
+    "IDCode": "15",
+    "TextValue": "平溪/深澳線"
+  },
+  {
+    "City_Code": "16",
+    "City_Name": "內灣/六家線",
+    "City_EName": "Neiwan / Liujia Line",
+    "Data_date": "1",
+    "City_Name_JP": "内湾/六家線",
+    "City_Name_KR": "네이완/다자선",
+    "City_Name_SC": "内湾/六家线",
+    "IDCode": "16",
+    "TextValue": "內灣/六家線"
+  },
+  {
+    "City_Code": "17",
+    "City_Name": "集集線",
+    "City_EName": "Jiji Line",
+    "Data_date": "1",
+    "City_Name_JP": "集集線",
+    "City_Name_KR": "지지선",
+    "City_Name_SC": "集集线",
+    "IDCode": "17",
+    "TextValue": "集集線"
+  },
+  {
+    "City_Code": "18",
+    "City_Name": "沙崙線",
+    "City_EName": "Shalun Line",
+    "Data_date": "1",
+    "City_Name_JP": "沙崙線",
+    "City_Name_KR": "사룬선",
+    "City_Name_SC": "沙仑线",
+    "IDCode": "18",
+    "TextValue": "沙崙線"
+  }
+]
