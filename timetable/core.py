@@ -3,7 +3,6 @@ import time
 
 import lxml.html
 import requests
-from loguru import logger
 
 from .schedule import TimeSchedule, TrainClass, parse_hour_minute
 from .record import RESULT_FIELDS, ResultEntry
@@ -39,39 +38,6 @@ class Queryset():
     def __iter__(self):
         for entry in self._results:
             yield entry
-
-
-class TrainTimetable():
-
-    time_table_url = 'http://twtraffic.tra.gov.tw/twrail/SearchResult.aspx'
-    TRA_home_url = 'http://twtraffic.tra.gov.tw/twrail/'
-
-    def __init__(self):
-        self.stations = self.get_station_data()
-
-    def query(self, name_code=True, **kwargs):
-        kwargs = self.clean_data(**kwargs) if name_code else kwargs
-        response = requests.get(self.time_table_url, params=kwargs)
-        document = lxml.html.fromstring(response.text)
-        document.make_links_absolute(self.TRA_home_url)
-        return Queryset(document.xpath("//tbody/tr[@class='Grid_Row']"))
-
-    def clean_data(self, **kwargs):
-        src = kwargs.get('fromstation', '')
-        end = kwargs.get('tostation', '')
-        kwargs['fromstation'] = self.station_name_to_code(src)
-        kwargs['tostation'] = self.station_name_to_code(end)
-        return kwargs
-
-    def get_station_data(self):
-        f = open('timetable/station.json', 'r', encoding='utf8')
-        return json.loads(f.read())
-
-    def station_name_to_code(self, name):
-        name = name.replace('台', '臺') + '站'
-        for station in self.stations:
-            if name == station['站名']:
-                return station['時刻表編號']
 
 
 class TaiwanRails:
@@ -124,11 +90,12 @@ class TaiwanRails:
         def form_data(**kwargs):
             src = kwargs.get('fromstation', '')
             end = kwargs.get('tostation', '')
+            src = src.replace('台', '臺')
+            end = end.replace('台', '臺')
             kwargs['fromstation'] = self.station[src]
             kwargs['tostation'] = self.station[end]
             return kwargs
 
-        logger.info(kwargs)
         response = requests.get(
             TaiwanRails.ENDPOINT_TIMETABLE_QUERY, params=form_data(**kwargs))
         document = lxml.html.fromstring(response.text)

@@ -1,5 +1,2 @@
-from loguru import logger
-
-from timetable.taiwan_rails_system import *
-
-logger.disable('timetable')
+from .core import TaiwanRails  # noqa
+from .record import TrainClass  # noqa
