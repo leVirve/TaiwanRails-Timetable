@@ -22,6 +22,9 @@ class TimeSchedule:
 
     def run(self):
         assert self.transfer_station
+        if not self.transfer_station:
+            return self._search(
+                self.start_station, self.end_station, self.train_class)
         assert TrainClass(self.train_class) == TrainClass.ALL
         trip_a = self._search(
             self.start_station, self.transfer_station, self.train_class)
